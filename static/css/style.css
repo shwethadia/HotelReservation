@@ -1,0 +1,57 @@
+.my-footer{
+        
+  background-color: #165965;
+  margin-top: 5em;  
+  height: 3.3em;
+  padding: 1em;
+  color: rgb(255, 255, 255);
+  font-size: 80%;
+  text-align: center;
+  margin-top: 270px;
+
+}
+
+.serach-button{
+
+  margin-top: 40px;
+
+}
+
+.form-row{
+
+  margin-top: 20px;
+}
+
+.notie-container{
+
+    box-shadow: none;
+}
+
+.datepicker {
+
+    z-index: 10000;
+}
+
+.carousel .carousel-item {
+
+  height: 450px;
+}
+
+.carousel-item h5{
+
+  color: rgb(0, 0, 0);
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+.carousel-item p{
+
+  color: maroon;
+  font-size: 30px;
+  font-size: larger;
+}
+
+.datepicker {
+
+    z-index: 100000;
+}

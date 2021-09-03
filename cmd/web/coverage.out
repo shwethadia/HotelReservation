@@ -1,0 +1,13 @@
+mode: set
+github.com/shwethadia/HotelReservation/cmd/web/main.go:23.13,26.16 2 0
+github.com/shwethadia/HotelReservation/cmd/web/main.go:31.2,40.16 4 0
+github.com/shwethadia/HotelReservation/cmd/web/main.go:26.16,29.3 1 0
+github.com/shwethadia/HotelReservation/cmd/web/main.go:40.16,42.3 1 0
+github.com/shwethadia/HotelReservation/cmd/web/main.go:45.18,60.16 10 1
+github.com/shwethadia/HotelReservation/cmd/web/main.go:65.2,70.12 6 1
+github.com/shwethadia/HotelReservation/cmd/web/main.go:60.16,63.3 2 0
+github.com/shwethadia/HotelReservation/cmd/web/middleware.go:10.53,11.71 1 1
+github.com/shwethadia/HotelReservation/cmd/web/middleware.go:11.71,14.3 2 0
+github.com/shwethadia/HotelReservation/cmd/web/middleware.go:17.45,29.2 3 1
+github.com/shwethadia/HotelReservation/cmd/web/middleware.go:31.50,33.2 1 1
+github.com/shwethadia/HotelReservation/cmd/web/routes.go:12.49,43.2 19 1

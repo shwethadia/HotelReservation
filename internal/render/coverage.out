@@ -1,0 +1,23 @@
+mode: set
+github.com/shwethadia/HotelReservation/internal/render/render.go:23.40,26.2 1 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:28.94,37.2 5 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:40.114,43.18 2 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:50.2,51.9 2 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:55.2,61.16 5 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:66.2,66.12 1 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:43.18,47.3 1 0
+github.com/shwethadia/HotelReservation/internal/render/render.go:47.8,49.3 1 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:51.9,54.3 1 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:61.16,64.3 2 0
+github.com/shwethadia/HotelReservation/internal/render/render.go:70.67,75.16 3 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:78.2,78.29 1 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:102.2,102.21 1 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:75.16,77.3 1 0
+github.com/shwethadia/HotelReservation/internal/render/render.go:78.29,82.17 3 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:86.3,87.17 2 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:91.3,91.23 1 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:99.3,99.21 1 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:82.17,84.4 1 0
+github.com/shwethadia/HotelReservation/internal/render/render.go:87.17,89.4 1 0
+github.com/shwethadia/HotelReservation/internal/render/render.go:91.23,94.18 2 1
+github.com/shwethadia/HotelReservation/internal/render/render.go:94.18,96.5 1 0
