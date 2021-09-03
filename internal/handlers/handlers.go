@@ -3,11 +3,11 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/shwethadia/HotelReservation/internal/config"
 	"github.com/shwethadia/HotelReservation/internal/forms"
+	"github.com/shwethadia/HotelReservation/internal/helpers"
 	"github.com/shwethadia/HotelReservation/internal/models"
 	"github.com/shwethadia/HotelReservation/internal/render"
 )
@@ -38,14 +38,7 @@ func NewHandlers(r *Repository) {
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
-	stringMap := make(map[string]string)
-	remoteIP := m.App.Session.GetString(r.Context(), "RemoteIp")
-
-	stringMap["RemoteIp"] = remoteIP
-	render.RenderTemplate(w, r, "about.page.htm", &models.TemplateData{
-
-		StringMap: stringMap,
-	})
+	render.RenderTemplate(w, r, "about.page.htm", &models.TemplateData{})
 }
 
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
@@ -76,7 +69,7 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 
-		log.Println(err)
+		helpers.ServerError(w, err)
 		return
 
 	}
@@ -93,7 +86,7 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 
 	//form.Has("first_name", r)
 	form.Required("first_name", "last_name", "email")
-	form.MinLength("first_name", 3, r)
+	form.MinLength("first_name", 3)
 	form.IsEmail("email")
 
 	if !form.Valid() {
@@ -160,7 +153,12 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 		Message: "Internal server error",
 	}
 
-	out, _ := json.MarshalIndent(resp, "", "    ")
+	out, err := json.MarshalIndent(resp, "", "    ")
+	if err != nil {
+
+		helpers.ServerError(w, err)
+		return
+	}
 	w.Header().Set("Content-type", "application/json")
 	w.Write(out)
 	//return
@@ -178,14 +176,13 @@ func (m *Repository) ReservatioinSummary(w http.ResponseWriter, r *http.Request)
 	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
 	if !ok {
 
-		log.Println("Cannot get item from session")
-		m.App.Session.Put(r.Context(),"error","Can't get reservation summary from session")
-		http.Redirect(w,r,"/",http.StatusTemporaryRedirect)
+		m.App.ErrorLog.Println("Can't get error from session")
+		m.App.Session.Put(r.Context(), "error", "Can't get reservation summary from session")
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
 
-
-	m.App.Session.Remove(r.Context(),"reservation")
+	m.App.Session.Remove(r.Context(), "reservation")
 
 	data := make(map[string]interface{})
 	data["reservation"] = reservation
