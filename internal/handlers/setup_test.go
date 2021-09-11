@@ -27,7 +27,6 @@ var functions = template.FuncMap{}
 
 func TestMain(m *testing.M) {
 
-
 	gob.Register(models.Reservation{})
 	//Change this to true when in production
 	app.InProduction = false
@@ -46,6 +45,14 @@ func TestMain(m *testing.M) {
 
 	app.Session = session
 
+	mailChan := make(chan models.MailData)
+
+	app.MailChan = mailChan
+
+	defer close(mailChan)
+
+	listenForMail()
+
 	tc, err := CreateTestTemplateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
@@ -57,12 +64,20 @@ func TestMain(m *testing.M) {
 	NewHandlers(repo)
 	render.NewRenderer(&app)
 
-
 	os.Exit(m.Run())
 
 }
 
+func listenForMail() {
 
+	go func() {
+
+		for {
+
+			_ = <-app.MailChan
+		}
+	}()
+}
 
 func getRoutes() http.Handler {
 
