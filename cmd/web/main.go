@@ -35,6 +35,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	PasswordHash()
+
 	defer db.SQL.Close()
 
 	defer close(app.MailChan)

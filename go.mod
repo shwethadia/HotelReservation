@@ -15,5 +15,6 @@ require (
 	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/valyala/fasttemplate v1.2.1 // indirect
 	github.com/xhit/go-simple-mail/v2 v2.10.0
+	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
 	golang.org/x/tools v0.1.5
 )

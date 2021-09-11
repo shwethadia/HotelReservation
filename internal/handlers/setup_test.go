@@ -76,6 +76,7 @@ func listenForMail() {
 
 			_ = <-app.MailChan
 		}
+
 	}()
 }
 

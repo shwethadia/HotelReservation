@@ -52,3 +52,29 @@ func (m *postgresDBTestRepo) GetRoomByID(id int) (models.Room, error) {
 
 	return room, nil
 }
+
+//GetUserByID gets a user by ID
+func (m *postgresDBTestRepo) GetUserByID(id int) (models.User, error) {
+
+	var user models.User
+
+	return user, nil
+}
+
+//UpdateUser updates a user in the database
+func (m *postgresDBTestRepo) UpdateUser(user models.User) error {
+
+	return nil
+
+}
+
+//Authenticate authenticate user
+func (m *postgresDBTestRepo) Authenticate(email, password string) (int, string, error) {
+
+	var id int
+
+	var hashedPassword string
+
+	return id, hashedPassword, nil
+
+}
