@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/smtp"
 	"os"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/shwethadia/HotelReservation/internal/config"
+	"github.com/shwethadia/HotelReservation/internal/driver"
 	"github.com/shwethadia/HotelReservation/internal/handlers"
 	"github.com/shwethadia/HotelReservation/internal/helpers"
 	"github.com/shwethadia/HotelReservation/internal/models"
@@ -28,10 +30,19 @@ var errorLog *log.Logger
 
 func main() {
 
-	err := run()
+	db, err := run()
 	if err != nil {
 
 		log.Fatal(err)
+	}
+
+	defer db.SQL.Close()
+
+	from := "me@here.com"
+	auth := smtp.PlainAuth("", from, "", "localhost")
+	err = smtp.SendMail("localhost:1025", auth, from, []string{"you@there.com"}, []byte("Hello World"))
+	if err != nil {
+		log.Println(err)
 	}
 
 	fmt.Printf(fmt.Sprintf("Starting application on port %s", portNumber))
@@ -48,9 +59,12 @@ func main() {
 	}
 }
 
-func run() error {
+func run() (*driver.DB, error) {
 
 	gob.Register(models.Reservation{})
+	gob.Register(models.User{})
+	gob.Register(models.Room{})
+	gob.Register(models.Restriction{})
 
 	//Change this to true when in production
 	app.InProduction = false
@@ -69,18 +83,28 @@ func run() error {
 
 	app.Session = session
 
+	//Connect to Database
+	log.Println("Connecting to database.....")
+	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=HotelReservation user=shwetha password=1234")
+	if err != nil {
+
+		log.Fatal("Cannot connect to database...")
+	}
+
+	log.Println("Connected to database")
+
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
-		return err
+		return nil, err
 	}
 
 	app.TemplateCache = tc
 	app.UseCache = false
-	repo := handlers.NewRepo(&app)
+	repo := handlers.NewRepo(&app, db)
 	handlers.NewHandlers(repo)
-	render.NewTemplates(&app)
+	render.NewRenderer(&app)
 	helpers.NewHelpers(&app)
-	return nil
+	return db, nil
 
 }

@@ -1,0 +1,36 @@
+-- existing reservation from 2021-02-01 to 2021-02-04
+
+-- Search date is exactly the same as existing reservation
+
+
+select count(id) from room_restrictions where '2021-02-01' < end_date and '2021-02-04' > start_date;
+
+
+-- Start date is before existing reservation , end date is same as existing reservation 
+
+select count(id) from room_restrictions where '2021-01-31' < end_date and '2021-02-04' > start_date;
+
+
+-- End date is before existing reservation , start date is same 
+
+select count(id) from room_restrictions where '2021-02-01' < end_date and '2021-02-07' > start_date;
+
+-- Search dates are outside of all existing reservations , but cover the reservation
+
+select count(id) from room_restrictions where '2021-01-01' < end_date and '2021-03-07' > start_date;
+
+-- Serach dates are outside of all existing reservations
+
+select count(id) from room_restrictions where '2021-07-01' < end_date and '2021-07-07' > start_date;
+
+-- Serach dates are inside of all existing reservations
+
+select count(id) from room_restrictions where '2021-02-02' < end_date and '2021-02-03' > start_date;
+
+
+
+-- Search the Room Id and Room Name which are vaialable
+
+select r.id, r.room_name from rooms r where r.id not in 
+    (select rr.room_id from room_restrictions rr 
+        where '2020-02-19' < rr.end_date and '2020-02-21' > rr.start_date)

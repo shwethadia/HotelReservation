@@ -4,7 +4,7 @@ import "testing"
 
 func TestRun(t *testing.T) {
 
-	err := run()
+	_,err := run()
 	if err != nil {
 
 		t.Errorf("failed run()")
