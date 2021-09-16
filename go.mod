@@ -17,4 +17,5 @@ require (
 	github.com/xhit/go-simple-mail/v2 v2.10.0
 	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
 	golang.org/x/tools v0.1.5
+	google.golang.org/genproto v0.0.0-20210909211513-a8c4777a87af
 )
